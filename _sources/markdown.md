@@ -78,7 +78,10 @@ plot(weight,age) # 画出年龄与体重的散点图
 ``` r
 example(cov2cor)
 ```
-{% hideToggle 输出内容过多点击展开 %}
+
+
+<details>
+  <summary>输出内容过多点击展开</summary>
 
     cov2cr> var(1:10)  # 9.166667
     [1] 9.166667
@@ -270,7 +273,8 @@ example(cov2cor)
        Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
      0.8942  1.1464  1.2452  1.3732  1.3722  2.3265 
 
-{% endhideToggle %}
+</details>
+
 ## 操作设置
 
 1.  读取工作空间和设置工作目录
@@ -280,7 +284,7 @@ getwd()#读取当前工作目录
 setwd(getwd()) # 将当前工作目录设置为当前工作目录、这里是多余的操作只为演示、自己设置、将`getwd()`设置为自己的路径即可
 ```
 
-‘d:/Statistics/编程相关/R语言/R语言实战’
+‘d:/Statistics/编程相关/R语言/R语言学习’
 
 1.  设置默认展示小数点后两位
 
