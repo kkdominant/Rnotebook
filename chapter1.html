@@ -1,0 +1,1225 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>一、R语言基础知识 &#8212; book1</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter1';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="最小二乘(OLS)回归" href="chapter2.html" />
+    <link rel="prev" title="R语言学习笔记" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="book1 - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="book1 - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    R语言学习笔记
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">一、R语言基础知识</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">最小二乘(OLS)回归</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E8%BF%99%E6%98%AF%E7%AC%AC%E5%9B%9B%E7%AB%A0.html">这是第四章</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chapter1.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>一、R语言基础知识</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">数据的输入、数据的类型及简单计算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">操作设置</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">矩阵、列表、数据框</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">一般矩阵的创建</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">特殊矩阵</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">列表</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">数据框:dataframe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">参考资料</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="r">
+<h1>一、R语言基础知识<a class="headerlink" href="#r" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>数据的输入、数据的类型及简单计算<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">weight</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="m">85</span><span class="p">,</span><span class="w"> </span><span class="m">95</span><span class="p">,</span><span class="w"> </span><span class="m">92</span><span class="p">,</span><span class="w"> </span><span class="m">88</span><span class="p">)</span>
+<span class="nf">typeof</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>‘double’</p>
+<blockquote>
+<div><p>在 R 语言中，double是一种用于表示双精度浮点数的数据类型。双精度浮点数可以存储十进制数，并具有较高的精度和范围，用于表示和计算实数。double
+类型是 R 中数值数据的默认类型。</p>
+</div></blockquote>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">weight_1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">weight</span><span class="p">);</span><span class="nf">typeof</span><span class="p">(</span><span class="n">weight_1</span><span class="p">)</span><span class="w"> </span><span class="c1"># 转换为characte(字符)类型</span>
+<span class="n">weight_2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">weight_1</span><span class="p">);</span><span class="nf">typeof</span><span class="p">((</span><span class="n">weight_2</span><span class="p">))</span><span class="w"> </span><span class="c1"># 转换为numeric(数值)类型</span>
+</pre></div>
+</div>
+<p>‘character’</p>
+<p>‘double’</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">age</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">21</span><span class="p">,</span><span class="w"> </span><span class="m">43</span><span class="p">,</span><span class="w"> </span><span class="m">52</span><span class="p">,</span><span class="w"> </span><span class="m">32</span><span class="p">,</span><span class="w"> </span><span class="m">43</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">mergedata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="c1">#合并两组数据</span>
+</pre></div>
+</div>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">mean</span><span class="p">(</span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="c1"># 计算年龄均值</span>
+</pre></div>
+</div>
+<p>38.2</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sd</span><span class="p">(</span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="c1"># 计算年龄标准差</span>
+</pre></div>
+</div>
+<p>11.9457105272144</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">var</span><span class="p">(</span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="c1"># 计算年龄方差</span>
+<span class="nf">var</span><span class="p">(</span><span class="n">mergedata</span><span class="p">)</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>142.7</p>
+<p>815.211111111111</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cov</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">weight</span><span class="p">)</span><span class="w"> </span><span class="c1"># 计算年龄与体重的协方差</span>
+<span class="nf">var</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">weight</span><span class="p">)</span><span class="w"> </span><span class="c1">#var(x,y)=cov(x,y)</span>
+</pre></div>
+</div>
+<p>5.75</p>
+<p>5.75</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">cor</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">weight</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s">&quot;pearson&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1"># 计算年龄与体重的相关系数</span>
+</pre></div>
+</div>
+<p>0.126407213237481</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="c1"># 画出年龄与体重的散点图</span>
+</pre></div>
+</div>
+<p><img alt="" src="https://kkdominant.oss-cn-shanghai.aliyuncs.com/img/202406191556848.png" /></p>
+<p>使用<code class="docutils literal notranslate"><span class="pre">example(function)</span></code>查看某函数的使用方法</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">example</span><span class="p">(</span><span class="n">cov2cor</span><span class="p">)</span>
+</pre></div>
+</div>
+<details>
+  <summary>输出内容过多点击展开</summary>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cov2cr&gt; var(1:10)  # 9.166667
+[1] 9.166667
+
+cov2cr&gt; var(1:5, 1:5) # 2.5
+[1] 2.5
+
+cov2cr&gt; ## Two simple vectors
+cov2cr&gt; cor(1:10, 2:11) # == 1
+[1] 1
+
+cov2cr&gt; ## Correlation Matrix of Multivariate sample:
+cov2cr&gt; (Cl &lt;- cor(longley))
+             GNP.deflator       GNP Unemployed Armed.Forces Population
+GNP.deflator    1.0000000 0.9915892  0.6206334    0.4647442  0.9791634
+GNP             0.9915892 1.0000000  0.6042609    0.4464368  0.9910901
+Unemployed      0.6206334 0.6042609  1.0000000   -0.1774206  0.6865515
+Armed.Forces    0.4647442 0.4464368 -0.1774206    1.0000000  0.3644163
+Population      0.9791634 0.9910901  0.6865515    0.3644163  1.0000000
+Year            0.9911492 0.9952735  0.6682566    0.4172451  0.9939528
+Employed        0.9708985 0.9835516  0.5024981    0.4573074  0.9603906
+                  Year  Employed
+GNP.deflator 0.9911492 0.9708985
+GNP          0.9952735 0.9835516
+Unemployed   0.6682566 0.5024981
+Armed.Forces 0.4172451 0.4573074
+Population   0.9939528 0.9603906
+Year         1.0000000 0.9713295
+Employed     0.9713295 1.0000000
+
+cov2cr&gt; ## Graphical Correlation Matrix:
+cov2cr&gt; symnum(Cl) # highly correlated
+             GNP. GNP U A P Y E
+GNP.deflator 1                 
+GNP          B    1            
+Unemployed   ,    ,   1        
+Armed.Forces .    .     1      
+Population   B    B   , . 1    
+Year         B    B   , . B 1  
+Employed     B    B   . . B B 1
+attr(,&quot;legend&quot;)
+[1] 0 &#39; &#39; 0.3 &#39;.&#39; 0.6 &#39;,&#39; 0.8 &#39;+&#39; 0.9 &#39;*&#39; 0.95 &#39;B&#39; 1
+
+cov2cr&gt; ## Spearman&#39;s rho  and  Kendall&#39;s tau
+cov2cr&gt; symnum(clS &lt;- cor(longley, method = &quot;spearman&quot;))
+             GNP. GNP U A P Y E
+GNP.deflator 1                 
+GNP          B    1            
+Unemployed   ,    ,   1        
+Armed.Forces          . 1      
+Population   B    B   ,   1    
+Year         B    B   ,   1 1  
+Employed     B    B   .   B B 1
+attr(,&quot;legend&quot;)
+[1] 0 &#39; &#39; 0.3 &#39;.&#39; 0.6 &#39;,&#39; 0.8 &#39;+&#39; 0.9 &#39;*&#39; 0.95 &#39;B&#39; 1
+
+cov2cr&gt; symnum(clK &lt;- cor(longley, method = &quot;kendall&quot;))
+             GNP. GNP U A P Y E
+GNP.deflator 1                 
+GNP          B    1            
+Unemployed   .    .   1        
+Armed.Forces            1      
+Population   B    B   .   1    
+Year         B    B   .   1 1  
+Employed     *    *   .   + + 1
+attr(,&quot;legend&quot;)
+[1] 0 &#39; &#39; 0.3 &#39;.&#39; 0.6 &#39;,&#39; 0.8 &#39;+&#39; 0.9 &#39;*&#39; 0.95 &#39;B&#39; 1
+
+cov2cr&gt; ## How much do they differ?
+cov2cr&gt; i &lt;- lower.tri(Cl)
+
+cov2cr&gt; cor(cbind(P = Cl[i], S = clS[i], K = clK[i]))
+          P         S         K
+P 1.0000000 0.9802390 0.9572562
+S 0.9802390 1.0000000 0.9742171
+K 0.9572562 0.9742171 1.0000000
+
+cov2cr&gt; ## cov2cor() scales a covariance matrix by its diagonal
+cov2cr&gt; ##           to become the correlation matrix.
+cov2cr&gt; cov2cor # see the function definition {and learn ..}
+function (V) 
+{
+    p &lt;- (d &lt;- dim(V))[1L]
+    if (!is.numeric(V) || length(d) != 2L || p != d[2L]) 
+        stop(&quot;&#39;V&#39; is not a square numeric matrix&quot;)
+    pos &lt;- !is.na(Is &lt;- D &lt;- diag(V, names = FALSE)) &amp; D &gt; 0
+    Is[pos] &lt;- sqrt(1/D[pos])
+    Is[!pos] &lt;- NaN
+    if (any(!pos) || any(!is.finite(Is))) 
+        warning(&quot;diag(V) had non-positive or NA entries; the non-finite result may be dubious&quot;)
+    r &lt;- V
+    r[] &lt;- Is * V * rep(Is, each = p)
+    if (p) 
+        r[seq.int(from = 1L, by = p + 1L, length.out = p)] &lt;- 1
+    r
+}
+&lt;bytecode: 0x000001d23fd06730&gt;
+&lt;environment: namespace:stats&gt;
+
+cov2cr&gt; stopifnot(all.equal(Cl, cov2cor(cov(longley))),
+cov2cr+           all.equal(cor(longley, method = &quot;kendall&quot;),
+cov2cr+             cov2cor(cov(longley, method = &quot;kendall&quot;))))
+
+cov2cr&gt; ##--- Missing value treatment:
+cov2cr&gt; C1 &lt;- cov(swiss)
+
+cov2cr&gt; range(eigen(C1, only.values = TRUE)$values) # 6.19        1921
+[1]    6.191249 1921.562488
+
+cov2cr&gt; ## swM := &quot;swiss&quot; with  3 &quot;missing&quot;s :
+cov2cr&gt; swM &lt;- swiss
+
+cov2cr&gt; colnames(swM) &lt;- abbreviate(colnames(swiss), minlength=6)
+
+cov2cr&gt; swM[1,2] &lt;- swM[7,3] &lt;- swM[25,5] &lt;- NA # create 3 &quot;missing&quot;
+
+cov2cr&gt; ## Consider all 5 &quot;use&quot; cases :
+cov2cr&gt; (C. &lt;- cov(swM)) # use=&quot;everything&quot;  quite a few NA&#39;s in cov.matrix
+          Frtlty Agrclt Exmntn     Eductn Cathlc    Infn.M
+Frtlty 156.04250     NA     NA -79.729510     NA 15.156193
+Agrclt        NA     NA     NA         NA     NA        NA
+Exmntn        NA     NA     NA         NA     NA        NA
+Eductn -79.72951     NA     NA  92.456059     NA -2.781684
+Cathlc        NA     NA     NA         NA     NA        NA
+Infn.M  15.15619     NA     NA  -2.781684     NA  8.483802
+
+cov2cr&gt; try(cov(swM, use = &quot;all&quot;)) # Error: missing obs...
+Error in cov(swM, use = &quot;all&quot;) : missing observations in cov/cor
+
+cov2cr&gt; C2 &lt;- cov(swM, use = &quot;complete&quot;)
+
+cov2cr&gt; stopifnot(identical(C2, cov(swM, use = &quot;na.or.complete&quot;)))
+
+cov2cr&gt; range(eigen(C2, only.values = TRUE)$values) # 6.46   1930
+[1]    6.462385 1930.505982
+
+cov2cr&gt; C3 &lt;- cov(swM, use = &quot;pairwise&quot;)
+
+cov2cr&gt; range(eigen(C3, only.values = TRUE)$values) # 6.19   1938
+[1]    6.194469 1938.033663
+
+cov2cr&gt; ## Kendall&#39;s tau doesn&#39;t change much:
+cov2cr&gt; symnum(Rc &lt;- cor(swM, method = &quot;kendall&quot;, use = &quot;complete&quot;))
+       F A Ex Ed C I
+Frtlty 1            
+Agrclt   1          
+Exmntn . . 1        
+Eductn . . .  1     
+Cathlc     .     1  
+Infn.M             1
+attr(,&quot;legend&quot;)
+[1] 0 &#39; &#39; 0.3 &#39;.&#39; 0.6 &#39;,&#39; 0.8 &#39;+&#39; 0.9 &#39;*&#39; 0.95 &#39;B&#39; 1
+
+cov2cr&gt; symnum(Rp &lt;- cor(swM, method = &quot;kendall&quot;, use = &quot;pairwise&quot;))
+       F A Ex Ed C I
+Frtlty 1            
+Agrclt   1          
+Exmntn . . 1        
+Eductn . . .  1     
+Cathlc     .     1  
+Infn.M .           1
+attr(,&quot;legend&quot;)
+[1] 0 &#39; &#39; 0.3 &#39;.&#39; 0.6 &#39;,&#39; 0.8 &#39;+&#39; 0.9 &#39;*&#39; 0.95 &#39;B&#39; 1
+
+cov2cr&gt; symnum(R. &lt;- cor(swiss, method = &quot;kendall&quot;))
+                 F A Ex Ed C I
+Fertility        1            
+Agriculture        1          
+Examination      . . 1        
+Education        . . .  1     
+Catholic             .     1  
+Infant.Mortality .           1
+attr(,&quot;legend&quot;)
+[1] 0 &#39; &#39; 0.3 &#39;.&#39; 0.6 &#39;,&#39; 0.8 &#39;+&#39; 0.9 &#39;*&#39; 0.95 &#39;B&#39; 1
+
+cov2cr&gt; ## &quot;pairwise&quot; is closer componentwise,
+cov2cr&gt; summary(abs(c(1 - Rp/R.)))
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+0.00000 0.00000 0.04481 0.09573 0.15214 0.53941 
+
+cov2cr&gt; summary(abs(c(1 - Rc/R.)))
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+0.00000 0.02021 0.08482 0.50675 0.16192 7.08509 
+
+cov2cr&gt; ## but &quot;complete&quot; is closer in Eigen space:
+cov2cr&gt; EV &lt;- function(m) eigen(m, only.values=TRUE)$values
+
+cov2cr&gt; summary(abs(1 - EV(Rp)/EV(R.)) / abs(1 - EV(Rc)/EV(R.)))
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.8942  1.1464  1.2452  1.3732  1.3722  2.3265 
+</pre></div>
+</div>
+</details>
+</section>
+<section id="id2">
+<h2>操作设置<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>读取工作空间和设置工作目录</p></li>
+</ol>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">getwd</span><span class="p">()</span><span class="c1">#读取当前工作目录</span>
+<span class="nf">setwd</span><span class="p">(</span><span class="nf">getwd</span><span class="p">())</span><span class="w"> </span><span class="c1"># 将当前工作目录设置为当前工作目录、这里是多余的操作只为演示、自己设置、将`getwd()`设置为自己的路径即可</span>
+</pre></div>
+</div>
+<p>‘d:/Statistics/编程相关/R语言/R语言学习’</p>
+<ol class="arabic simple">
+<li><p>设置默认展示小数点后两位</p></li>
+</ol>
+<!-- -->
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>options(digits = 2)
+</pre></div>
+</div>
+<p>注意此函数只有当print的时候才有用、如<code class="docutils literal notranslate"><span class="pre">print(sd(weight))</span></code>时才会有用。 *
+options(digits = 2) 影响全局数字显示精度，但不改变函数输出的精度。 *
+使用 round、format 或在 print 中设置 digits 可以控制输出时的显示精度。</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">options</span><span class="p">(</span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+<span class="nf">sd</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span><span class="w"> </span><span class="c1"># 输出结果3.80788655293195、并没有保留两位小数  </span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">sd</span><span class="p">(</span><span class="n">weight</span><span class="p">))</span><span class="w"> </span><span class="c1"># 输出结果3.81</span>
+</pre></div>
+</div>
+<p>3.80788655293195</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[1] 3.8
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>矩阵、列表、数据框<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<section id="id4">
+<h3>一般矩阵的创建<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>matrix(data = NA, nrow = 1, ncol = 1, byrow = FALSE,
+        dimnames = NULL)
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>nrow,ncol 是行数和列数</p></li>
+<li><p>byrow = FALSE 按列填充
+matrix都是二维数的、如果你想创建高维的数组、可以通过<code class="docutils literal notranslate"><span class="pre">array</span></code>函数来创建、使用上面提过的、<code class="docutils literal notranslate"><span class="pre">example(array)</span></code>查看相关用法</p></li>
+</ul>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">demo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+<span class="c1">#更改行名和列名</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">demo</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="p">,</span><span class="s">&quot;D&quot;</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">demo</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Jack&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;BOb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mike&quot;</span><span class="p">)</span>
+<span class="n">demo</span>
+</pre></div>
+</div>
+<p>A matrix: 4 × 3 of type int</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><!--/--></p></th>
+<th class="head"><p>Jack</p></th>
+<th class="head"><p>BOb</p></th>
+<th class="head"><p>Mike</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>1</p></td>
+<td><p>5</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>2</p></td>
+<td><p>6</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>3</p></td>
+<td><p>7</p></td>
+<td><p>11</p></td>
+</tr>
+<tr class="row-odd"><td><p>D</p></td>
+<td><p>4</p></td>
+<td><p>8</p></td>
+<td><p>12</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>使用索引提取其中的元素</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">demo</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="c1">#输出1， 提取第一行第一列的元素</span>
+<span class="n">demo</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="c1">#输出1， 提取第一行第一列的元素</span>
+<span class="n">demo</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="c1"># 提取第一行元素</span>
+<span class="n">demo</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="c1"># 提取第一列元素</span>
+<span class="n">demo</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)]</span><span class="w"> </span><span class="c1"># 提取1-2行,1和3列的交叉元素</span>
+</pre></div>
+</div>
+<p><img alt="" src="https://kkdominant.oss-cn-shanghai.aliyuncs.com/img/202406191602496.png" /></p>
+<p>A matrix: 2 × 2 of type int</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><!--/--></p></th>
+<th class="head"><p>Jack</p></th>
+<th class="head"><p>Mike</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>1</p></td>
+<td><p>9</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>2</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id5">
+<h3>特殊矩阵<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>希尔伯特 (Hilbert Matrix)矩阵的创建</p>
+<blockquote>
+<div><p>希尔伯特矩阵是一个以德国数学家大卫·希尔伯特命名的特殊矩阵。它的元素定义为矩阵行列索引之和的倒数，形式为：
+<span class="math notranslate nohighlight">\( H_{ij} = 1/(i+j-1)\)</span></p>
+</div></blockquote>
+<p>对于一个 <span class="math notranslate nohighlight">\(n \times n\)</span> 的希尔伯特矩阵 <span class="math notranslate nohighlight">\(H\)</span> ，其第 <span class="math notranslate nohighlight">\(i\)</span> 行第 <span class="math notranslate nohighlight">\( j \)</span>列的元素可以表示为：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    H = \begin{pmatrix}
+1 &amp; \frac{1}{2} &amp; \frac{1}{3} &amp; \cdots &amp; \frac{1}{n} \\
+\frac{1}{2} &amp; \frac{1}{3} &amp; \frac{1}{4} &amp; \cdots &amp; \frac{1}{n+1} \\
+\frac{1}{3} &amp; \frac{1}{4} &amp; \frac{1}{5} &amp; \cdots &amp; \frac{1}{n+2} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\frac{1}{n} &amp; \frac{1}{n+1} &amp; \frac{1}{n+2} &amp; \cdots &amp; \frac{1}{2n-1}
+\end{pmatrix}
+\end{split}\]</div>
+<p><strong>性质</strong></p>
+<ul class="simple">
+<li><p><strong>对称性</strong>: 希尔伯特矩阵是对称矩阵。</p></li>
+<li><p><strong>正定性</strong>: 它是正定矩阵，即对所有非零向量 <span class="math notranslate nohighlight">\(x\)</span> ，有 <span class="math notranslate nohighlight">\( x^T H x &gt;0\)</span>。</p></li>
+<li><p><strong>条件数</strong>:希尔伯特矩阵的条件数（衡量矩阵是否容易出现数值误差的指标）随着矩阵维数增加而迅速增大，因此其数值稳定性较差。</p></li>
+</ul>
+<p>使用for循环来生成一个4阶希尔伯特矩阵,当然也可以自定义函数来生成一个<span class="math notranslate nohighlight">\(n\times n\)</span>阶的矩阵、这里就省略了</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Hilbert</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">4</span><span class="p">)</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nf">for </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Hilbert</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="n">Hilbert</span>
+</pre></div>
+</div>
+<p>A matrix: 4 × 4 of type dbl</p>
+<p>1.00 | 0.50 | 0.33 | 0.25 |<br />
+0.50 | 0.33 | 0.25 | 0.20 |<br />
+0.33 | 0.25 | 0.20 | 0.17 |<br />
+0.25 | 0.20 | 0.17 | 0.14 |</p>
+</section>
+<section id="id6">
+<h3>列表<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>首先有个疑问什么是列表?和python中的[ ]一样吗？ 在 R
+语言中，列表（list）是一种非常灵活的数据结构，可以容纳不同类型的元素，包括向量、矩阵、数据框、甚至其他列表。这种灵活性使得列表特别适合用于存储异构数据或复杂的数据结构。</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建一个简单的列表</span>
+<span class="n">my_list</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="n">scores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">90</span><span class="p">,</span><span class="w"> </span><span class="m">85</span><span class="p">,</span><span class="w"> </span><span class="m">88</span><span class="p">))</span>
+<span class="n">my_list</span>
+</pre></div>
+</div>
+<p>$name<br />
+‘Alice’
+$age</p>
+<p>25
+$scores</p>
+<ol class="arabic simple">
+<li><p>90</p></li>
+<li><p>85</p></li>
+<li><p>88</p></li>
+</ol>
+<p>可以通过使用[ ]访问列表中的单个元素，或使用 $
+操作符来访问命名元素：</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 使用 [[ ]] 访问列表元素</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">[[</span><span class="m">1</span><span class="p">]])</span><span class="w"> </span><span class="c1"># &quot;Alice&quot;</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">[[</span><span class="m">3</span><span class="p">]])</span><span class="w"> </span><span class="c1"># c(90, 85, 88)</span>
+
+<span class="c1"># 使用 $ 访问命名元素</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">my_list</span><span class="o">$</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="c1"># &quot;Alice&quot;</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">my_list</span><span class="o">$</span><span class="n">scores</span><span class="p">)</span><span class="w"> </span><span class="c1"># c(90, 85, 88)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[1] &quot;Alice&quot;
+[1] 90 85 88
+[1] &quot;Alice&quot;
+[1] 90 85 88
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dataframe">
+<h2>数据框:dataframe<a class="headerlink" href="#dataframe" title="Link to this heading">#</a></h2>
+<p>dataframe是R语言中最常用的数据类型之一、它是一种特殊的表格数据结构，用来存储二维数据.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">demo1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">));</span><span class="n">demo1</span>
+<span class="c1"># 使用head和tail函数查看数据大致结构</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">demo1</span><span class="p">,</span><span class="m">3</span><span class="p">)</span><span class="c1">#查看前面三行、默认6行</span>
+<span class="nf">tail</span><span class="p">(</span><span class="n">demo1</span><span class="p">,</span><span class="m">2</span><span class="p">)</span><span class="c1">#后两行、默认6行</span>
+</pre></div>
+</div>
+<p>A data.frame: 10 × 10</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>X1 &lt;int&gt;</p></th>
+<th class="head"><p>X2 &lt;int&gt;</p></th>
+<th class="head"><p>X3 &lt;int&gt;</p></th>
+<th class="head"><p>X4 &lt;int&gt;</p></th>
+<th class="head"><p>X5 &lt;int&gt;</p></th>
+<th class="head"><p>X6 &lt;int&gt;</p></th>
+<th class="head"><p>X7 &lt;int&gt;</p></th>
+<th class="head"><p>X8 &lt;int&gt;</p></th>
+<th class="head"><p>X9 &lt;int&gt;</p></th>
+<th class="head"><p>X10 &lt;int&gt;</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>11</p></td>
+<td><p>21</p></td>
+<td><p>31</p></td>
+<td><p>41</p></td>
+<td><p>51</p></td>
+<td><p>61</p></td>
+<td><p>71</p></td>
+<td><p>81</p></td>
+<td><p>91</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>12</p></td>
+<td><p>22</p></td>
+<td><p>32</p></td>
+<td><p>42</p></td>
+<td><p>52</p></td>
+<td><p>62</p></td>
+<td><p>72</p></td>
+<td><p>82</p></td>
+<td><p>92</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>13</p></td>
+<td><p>23</p></td>
+<td><p>33</p></td>
+<td><p>43</p></td>
+<td><p>53</p></td>
+<td><p>63</p></td>
+<td><p>73</p></td>
+<td><p>83</p></td>
+<td><p>93</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>14</p></td>
+<td><p>24</p></td>
+<td><p>34</p></td>
+<td><p>44</p></td>
+<td><p>54</p></td>
+<td><p>64</p></td>
+<td><p>74</p></td>
+<td><p>84</p></td>
+<td><p>94</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>15</p></td>
+<td><p>25</p></td>
+<td><p>35</p></td>
+<td><p>45</p></td>
+<td><p>55</p></td>
+<td><p>65</p></td>
+<td><p>75</p></td>
+<td><p>85</p></td>
+<td><p>95</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>16</p></td>
+<td><p>26</p></td>
+<td><p>36</p></td>
+<td><p>46</p></td>
+<td><p>56</p></td>
+<td><p>66</p></td>
+<td><p>76</p></td>
+<td><p>86</p></td>
+<td><p>96</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>17</p></td>
+<td><p>27</p></td>
+<td><p>37</p></td>
+<td><p>47</p></td>
+<td><p>57</p></td>
+<td><p>67</p></td>
+<td><p>77</p></td>
+<td><p>87</p></td>
+<td><p>97</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>18</p></td>
+<td><p>28</p></td>
+<td><p>38</p></td>
+<td><p>48</p></td>
+<td><p>58</p></td>
+<td><p>68</p></td>
+<td><p>78</p></td>
+<td><p>88</p></td>
+<td><p>98</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>19</p></td>
+<td><p>29</p></td>
+<td><p>39</p></td>
+<td><p>49</p></td>
+<td><p>59</p></td>
+<td><p>69</p></td>
+<td><p>79</p></td>
+<td><p>89</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>20</p></td>
+<td><p>30</p></td>
+<td><p>40</p></td>
+<td><p>50</p></td>
+<td><p>60</p></td>
+<td><p>70</p></td>
+<td><p>80</p></td>
+<td><p>90</p></td>
+<td><p>100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A data.frame: 3 × 10</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><!--/--></p></th>
+<th class="head"><p>X1 &lt;int&gt;</p></th>
+<th class="head"><p>X2 &lt;int&gt;</p></th>
+<th class="head"><p>X3 &lt;int&gt;</p></th>
+<th class="head"><p>X4 &lt;int&gt;</p></th>
+<th class="head"><p>X5 &lt;int&gt;</p></th>
+<th class="head"><p>X6 &lt;int&gt;</p></th>
+<th class="head"><p>X7 &lt;int&gt;</p></th>
+<th class="head"><p>X8 &lt;int&gt;</p></th>
+<th class="head"><p>X9 &lt;int&gt;</p></th>
+<th class="head"><p>X10 &lt;int&gt;</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>11</p></td>
+<td><p>21</p></td>
+<td><p>31</p></td>
+<td><p>41</p></td>
+<td><p>51</p></td>
+<td><p>61</p></td>
+<td><p>71</p></td>
+<td><p>81</p></td>
+<td><p>91</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>12</p></td>
+<td><p>22</p></td>
+<td><p>32</p></td>
+<td><p>42</p></td>
+<td><p>52</p></td>
+<td><p>62</p></td>
+<td><p>72</p></td>
+<td><p>82</p></td>
+<td><p>92</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>3</p></td>
+<td><p>13</p></td>
+<td><p>23</p></td>
+<td><p>33</p></td>
+<td><p>43</p></td>
+<td><p>53</p></td>
+<td><p>63</p></td>
+<td><p>73</p></td>
+<td><p>83</p></td>
+<td><p>93</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A data.frame: 2 × 10</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><!--/--></p></th>
+<th class="head"><p>X1 &lt;int&gt;</p></th>
+<th class="head"><p>X2 &lt;int&gt;</p></th>
+<th class="head"><p>X3 &lt;int&gt;</p></th>
+<th class="head"><p>X4 &lt;int&gt;</p></th>
+<th class="head"><p>X5 &lt;int&gt;</p></th>
+<th class="head"><p>X6 &lt;int&gt;</p></th>
+<th class="head"><p>X7 &lt;int&gt;</p></th>
+<th class="head"><p>X8 &lt;int&gt;</p></th>
+<th class="head"><p>X9 &lt;int&gt;</p></th>
+<th class="head"><p>X10 &lt;int&gt;</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>9</p></td>
+<td><p>19</p></td>
+<td><p>29</p></td>
+<td><p>39</p></td>
+<td><p>49</p></td>
+<td><p>59</p></td>
+<td><p>69</p></td>
+<td><p>79</p></td>
+<td><p>89</p></td>
+<td><p>99</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>20</p></td>
+<td><p>30</p></td>
+<td><p>40</p></td>
+<td><p>50</p></td>
+<td><p>60</p></td>
+<td><p>70</p></td>
+<td><p>80</p></td>
+<td><p>90</p></td>
+<td><p>100</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id7">
+<h2>参考资料<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://r4ds.had.co.nz/vectors.html">Vectors in R - R for Data Science</a></p></li>
+<li><p><a class="reference external" href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/numeric">R Documentation on numeric</a></p></li>
+<li><p><a class="reference external" href="https://www.tutorialgateway.org/r-vectors/">Working with Vectors in R - Tutorial Gateway</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">R语言学习笔记</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chapter2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">最小二乘(OLS)回归</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">数据的输入、数据的类型及简单计算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">操作设置</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">矩阵、列表、数据框</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">一般矩阵的创建</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">特殊矩阵</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">列表</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe">数据框:dataframe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">参考资料</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
